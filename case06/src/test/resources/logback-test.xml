@@ -1,0 +1,15 @@
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="org.springframework.batch" level="error" />
+	<logger name="org.springframework.core" level="error" />
+
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

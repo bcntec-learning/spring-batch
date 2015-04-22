@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>houseware.capacitacion.spring-batch</groupId>
+        <artifactId>spring-batch</artifactId>
+        <relativePath>../</relativePath>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>case04</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>houseware.capacitacion.spring-batch</groupId>
+            <artifactId>base</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>com.springsource.org.codehaus.jackson</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>com.springsource.org.codehaus.jackson.mapper</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>javax.xml.stream</groupId>
+            <artifactId>com.springsource.javax.xml.stream</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml</artifactId>
+            <version>1.3.3</version>
+        </dependency>
+
+
+    </dependencies>
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>houseware.capacitacion.spring-batch</groupId>
+        <artifactId>spring-batch</artifactId>
+        <relativePath>../</relativePath>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>case07</artifactId>
+    <dependencies>
+        <dependency>
+
+            <groupId>houseware.capacitacion.spring-batch</groupId>
+            <artifactId>base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.10</version>
+        </dependency>
+
+    </dependencies>
+</project>

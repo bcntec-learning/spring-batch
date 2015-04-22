@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+
+    <import resource="tasklet-definition.xml"/>
+     
+    <batch:job id="importProductsJob">
+   		<batch:step id="prepareInputFileStep" next="fileExistsDecision">
+   			<batch:flow parent="prepareInputFileFlow" />			
+   		</batch:step>
+   		<batch:decision id="fileExistsDecision" decider="fileExistsDecider">
+   			<batch:end on="NO FILE" />
+   			<batch:next on="FILE EXISTS" to="readWriteStep" />
+   		</batch:decision>
+   		<batch:step id="readWriteStep" next="skippedItemsDecision">
+   			<tasklet ref="readWriteProductsTasklet" />
+   		</batch:step>
+   		<batch:decision id="skippedItemsDecision" decider="skippedItemsDecider">
+   			<batch:next on="COMPLETED WITH SKIPS" to="generateReportStep" />
+   			<batch:next on="*" to="indexStep" />
+   		</batch:decision>
+   		<batch:step id="generateReportStep" next="indexStep">
+   			<tasklet ref="generateReportTasklet" />
+   		</batch:step>
+   		<batch:step id="indexStep" next="trackImportStep">
+   			<tasklet ref="indexTasklet" />
+   		</batch:step>
+   		<batch:step id="trackImportStep" next="cleanStep">
+   			<tasklet ref="trackImportTasklet" />
+   		</batch:step>
+   		<batch:step id="cleanStep">
+   			<tasklet ref="cleanTasklet" />
+   		</batch:step>
+   	</batch:job>
+   	
+   	<batch:flow id="prepareInputFileFlow" xmlns="http://www.springframework.org/schema/batch">
+   		<batch:step id="downloadStep" next="fileExistsDecisionInFlow">
+   			<tasklet ref="downloadTasklet" />
+   		</batch:step>
+   		<batch:decision id="fileExistsDecisionInFlow" decider="fileExistsDecider">
+   			<batch:end on="NO FILE" />
+   			<batch:next on="FILE EXISTS" to="decompressStep" />
+   		</batch:decision>
+   		<batch:step id="decompressStep" next="verifyStep">
+   			<tasklet ref="decompressTasklet" />
+   		</batch:step>
+   		<batch:step id="verifyStep">
+   			<tasklet ref="verifyTasklet" />
+   		</batch:step>
+   	</batch:flow>
+   	
+   	<bean id="fileExistsDecider" class="houseware.learn.spring.springbatch.case08.FileExistsDecider">
+   		<property name="batchService" ref="batchService" />
+   	</bean>
+   	
+   	<bean id="skippedItemsDecider" class="houseware.learn.spring.springbatch.case08.SkippedItemsDecider" />
+     
+
+
+</beans>
