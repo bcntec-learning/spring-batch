@@ -1,4 +1,4 @@
-package houseware.learn.spring.springbatch.case04;
+package houseware.learn.spring.springbatch.case03;
 
 import org.springframework.batch.item.file.LineMapper;
 
