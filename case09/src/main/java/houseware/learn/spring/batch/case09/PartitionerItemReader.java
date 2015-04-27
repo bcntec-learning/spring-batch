@@ -1,4 +1,4 @@
-package houseware.learn.spring.batch.case06;
+package houseware.learn.spring.batch.case09;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,16 +10,16 @@ import org.springframework.batch.item.UnexpectedInputException;
 /**
  * @author fphilip@houseware.es
  */
-public class DummyItemReader implements ItemReader<Dummy> {
+public class PartitionerItemReader implements ItemReader<PartitionerItem> {
     private long i = 1;
     @Getter @Setter
-    private long size=100;
+    private long size=1000;
     @Override
-    public Dummy read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+    public PartitionerItem read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
         if (i > size) {
             return null;
         }
 
-        return new Dummy(i++);
+        return new PartitionerItem(i++);
     }
 }

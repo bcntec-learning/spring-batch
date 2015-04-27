@@ -9,6 +9,7 @@
     <import resource="classpath:houseware/learn/spring/batch/base/context-base.xml"/>
     <import resource="classpath:houseware/learn/spring/batch/case03/jobs.xml"/>
     <import resource="classpath:houseware/learn/spring/batch/case09/split-jobs.xml"/>
+    <import resource="classpath:houseware/learn/spring/batch/case09/partitioner-jobs.xml"/>
 
     <bean class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
