@@ -1,5 +1,7 @@
 #Houseware Learn
 ##Case 4
 
-merged
+ORM / JPA
+Web Services JSON to JPA
+Custom
 

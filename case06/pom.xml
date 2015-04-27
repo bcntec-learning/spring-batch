@@ -4,7 +4,7 @@
         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>houseware.capacitacion.spring-batch</groupId>
+        <groupId>houseware.learn.spring.batch</groupId>
         <artifactId>spring-batch</artifactId>
         <relativePath>../</relativePath>
         <version>1.0.0</version>
@@ -12,7 +12,7 @@
     <artifactId>case06</artifactId>
     <dependencies>
         <dependency>
-            <groupId>houseware.capacitacion.spring-batch</groupId>
+            <groupId>houseware.learn.spring.batch</groupId>
             <artifactId>base</artifactId>
         </dependency>
 

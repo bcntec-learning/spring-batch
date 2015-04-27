@@ -4,7 +4,7 @@
         xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>houseware.capacitacion.spring-batch</groupId>
+        <groupId>houseware.learn.spring.batch</groupId>
         <artifactId>spring-batch</artifactId>
         <relativePath>../</relativePath>
         <version>1.0.0</version>
@@ -12,10 +12,36 @@
     <artifactId>case04</artifactId>
     <dependencies>
         <dependency>
-            <groupId>houseware.capacitacion.spring-batch</groupId>
+            <groupId>houseware.learn.spring.batch</groupId>
             <artifactId>base</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.5.Final</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>ejb3-persistence</artifactId>
+            <version>1.0.2.GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.0.4.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>

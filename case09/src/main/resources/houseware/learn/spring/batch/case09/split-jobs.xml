@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+
+    <import resource="classpath:houseware/learn/spring/batch/case03/jobs.xml"/>
+
+
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="5"/>
+        <property name="maxPoolSize" value="5"/>
+    </bean>
+
+
+    <batch:job id="sliptImportJob">
+        <batch:step id="splitImportJobStep0" parent="splitCleanData" next="splitImport"/>
+
+        <batch:split id="splitImport" task-executor="taskExecutor" next="sliptImportJobStep6">
+            <batch:flow>
+                <batch:step id="sliptImportJobStep1" parent="notebooksImportStep">
+                    <batch:listeners>
+                        <batch:listener ref="sleepStepExecutionListener"/>
+                    </batch:listeners>
+                </batch:step>
+            </batch:flow>
+            <batch:flow>
+                <batch:step id="sliptImportJobStep2" parent="decompressPhonesStep" next="sliptImportJobStep3"/>
+                <batch:step id="sliptImportJobStep3" parent="phoneImportStep">
+                    <batch:listeners>
+                        <batch:listener ref="sleepStepExecutionListener"/>
+                    </batch:listeners>
+                </batch:step>
+            </batch:flow>
+            <batch:flow>
+                <batch:step id="sliptImportJobStep4" parent="productJSONImportStep">
+                    <batch:listeners>
+                        <batch:listener ref="sleepStepExecutionListener"/>
+                    </batch:listeners>
+                </batch:step>
+            </batch:flow>
+            <batch:flow>
+                <batch:step id="sliptImportJobStep5" parent="productXMLImportStep">
+                    <batch:listeners>
+                        <batch:listener ref="sleepStepExecutionListener"/>
+                    </batch:listeners>
+                </batch:step>
+            </batch:flow>
+        </batch:split>
+
+        <batch:step id="sliptImportJobStep6" parent="exportProductsTxt"/>
+
+
+    </batch:job>
+
+
+    <batch:job id="noSplitImportJob">
+
+        <batch:step id="completeImportJobStep0" parent="splitCleanData" next="completeImportJobStep1"/>
+
+        <batch:step id="completeImportJobStep1" parent="notebooksImportStep" next="completeImportJobStep2">
+            <batch:listeners>
+                <batch:listener ref="sleepStepExecutionListener"/>
+            </batch:listeners>
+        </batch:step>
+
+        <batch:step id="completeImportJobStep2" parent="decompressPhonesStep" next="completeImportJobStep3">
+            <batch:listeners>
+                <batch:listener ref="sleepStepExecutionListener"/>
+            </batch:listeners>
+        </batch:step>
+        <batch:step id="completeImportJobStep3" parent="phoneImportStep" next="completeImportJobStep4">
+            <batch:listeners>
+                <batch:listener ref="sleepStepExecutionListener"/>
+            </batch:listeners>
+        </batch:step>
+        <batch:step id="completeImportJobStep4" parent="productJSONImportStep" next="completeImportJobStep5">
+            <batch:listeners>
+                <batch:listener ref="sleepStepExecutionListener"/>
+            </batch:listeners>
+        </batch:step>
+        <batch:step id="completeImportJobStep5" parent="productXMLImportStep" next="completeImportJobStep6">
+            <batch:listeners>
+                <batch:listener ref="sleepStepExecutionListener"/>
+            </batch:listeners>
+        </batch:step>
+
+        <batch:step id="completeImportJobStep6" parent="exportProductsTxt"/>
+
+
+    </batch:job>
+
+
+    <batch:step id="splitCleanData">
+        <batch:tasklet ref="removeDataTasklet"/>
+    </batch:step>
+
+    <bean id="sleepStepExecutionListener" class="houseware.learn.spring.batch.case09.test.SleepStepExecutionListener"/>
+    <bean id="removeDataTasklet" class="houseware.learn.spring.batch.case09.test.ResetDataTasklet"/>
+</beans>

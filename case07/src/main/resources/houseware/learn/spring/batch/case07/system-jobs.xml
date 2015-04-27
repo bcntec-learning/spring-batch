@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+
+    <batch:job id="systemCommandJob">
+        <batch:step id="systemCommandJobStep1" next="systemCommandJobStep2">
+            <batch:tasklet>
+
+                <bean class="org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter">
+                    <property name="targetObject" ref="simpleService"/>
+                    <property name="targetMethod" value="simpleServiceMethod"/>
+                </bean>
+            </batch:tasklet>
+        </batch:step>
+        <batch:step id="systemCommandJobStep2" next="systemCommandJobStep3">
+            <batch:tasklet>
+                <batch:chunk commit-interval="50">
+                    <batch:reader>
+                        <bean class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+                            <property name="resource" value="file:/tmp/test.txt"/>
+                            <property name="lineMapper">
+                                <bean class="houseware.learn.spring.batch.case07.PassThroughLineMapper"/>
+                            </property>
+                        </bean>
+                    </batch:reader>
+                    <batch:writer>
+                        <bean class="org.springframework.batch.item.file.FlatFileItemWriter">
+
+                            <property name="resource" value="file:target/files.txt"/>
+
+
+                            <property name="lineAggregator">
+                                <bean class="org.springframework.batch.item.file.transform.PassThroughLineAggregator"/>
+                            </property>
+                            <property name="headerCallback" ref="simpleService"/>
+                            <property name="footerCallback" ref="simpleService"/>
+                        </bean>
+
+
+                    </batch:writer>
+                </batch:chunk>
+            </batch:tasklet>
+        </batch:step>
+        <batch:step id="systemCommandJobStep3">
+
+            <batch:tasklet>
+
+                <bean class="org.springframework.batch.core.step.tasklet.SystemCommandTasklet">
+
+                    <property name="command" value="/bin/rm /tmp/test.txt"/>
+                    <property name="workingDirectory" value="/tmp"/>
+
+                    <property name="timeout" value="100"/>
+                    <property name="interruptOnCancel" value="true"/>
+                </bean>
+            </batch:tasklet>
+
+        </batch:step>
+    </batch:job>
+
+    <bean id="simpleService" class="houseware.learn.spring.batch.case07.SimpleService"/>
+</beans>
