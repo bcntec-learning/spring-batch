@@ -7,42 +7,58 @@ import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DefaultFieldSet;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.batch.item.file.transform.LineTokenizer;
+import org.springframework.batch.item.file.transform.PatternMatchingCompositeLineTokenizer;
+import org.springframework.batch.support.PatternMatcher;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
+
+import java.util.Map;
 
 /**
  *
  */
 public class SpecialLineMapper<T>  implements LineMapper<T>, InitializingBean {
 
-    private LineTokenizer tokenizer;
 
-    private FieldSetMapper<T> fieldSetMapper;
+    private PatternMatchingCompositeLineTokenizer tokenizer = new PatternMatchingCompositeLineTokenizer();
+
+    private PatternMatcher<FieldSetMapper<T>> patternMatcher;
+
 
     @Override
     public T mapLine(String line, int lineNumber) throws Exception {
         DefaultFieldSet z = (DefaultFieldSet) tokenizer.tokenize(line);
 
-        return fieldSetMapper.mapFieldSet(
-                 new DefaultFieldSet((String[])ArrayUtils.add(z.getNames(),"_IDX_"),
-                         (String[])ArrayUtils.add(z.getValues(), String.valueOf(lineNumber)))
+        return patternMatcher.match(line).mapFieldSet(
+                 new DefaultFieldSet(
+                         (String[])ArrayUtils.add(z.getValues(), String.valueOf(lineNumber)),
+                         (String[])ArrayUtils.add(z.getNames(),"__idx__")
+                 )
 
 
         );
     }
 
-    public void setLineTokenizer(LineTokenizer tokenizer) {
-        this.tokenizer = tokenizer;
-    }
 
-    public void setFieldSetMapper(FieldSetMapper<T> fieldSetMapper) {
-        this.fieldSetMapper = fieldSetMapper;
-    }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
     @Override
-    public void afterPropertiesSet() {
-        Assert.notNull(tokenizer, "The LineTokenizer must be set");
-        Assert.notNull(fieldSetMapper, "The FieldSetMapper must be set");
+    public void afterPropertiesSet() throws Exception {
+        this.tokenizer.afterPropertiesSet();
+        Assert.isTrue(this.patternMatcher != null, "The 'fieldSetMappers' property must be non-empty");
     }
 
+    public void setTokenizers(Map<String, LineTokenizer> tokenizers) {
+        this.tokenizer.setTokenizers(tokenizers);
+    }
+
+    public void setFieldSetMappers(Map<String, FieldSetMapper<T>> fieldSetMappers) {
+        Assert.isTrue(!fieldSetMappers.isEmpty(), "The 'fieldSetMappers' property must be non-empty");
+        this.patternMatcher = new PatternMatcher<FieldSetMapper<T>>(fieldSetMappers);
+    }
 }

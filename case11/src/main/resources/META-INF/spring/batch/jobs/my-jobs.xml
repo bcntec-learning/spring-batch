@@ -10,4 +10,5 @@
     <import resource="classpath:houseware/learn/spring/batch/case06/restart-jobs.xml"/>
     <import resource="classpath:houseware/learn/spring/batch/case09/partitioner-jobs.xml"/>
     <import resource="classpath:houseware/learn/spring/batch/case08/flow-jobs.xml"/>
+
 </beans>
