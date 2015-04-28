@@ -12,7 +12,6 @@ public class PartitionerItemProcessor implements ItemProcessor<PartitionerItem,P
     @Override
     public PartitionerItem process(PartitionerItem item) throws Exception {
         item.setTimestamp(new Date());
-//        Thread.sleep(500);
         return item;
     }
 }

@@ -6,7 +6,13 @@
 
 
     <import resource="classpath:houseware/learn/spring/batch/base/context-base.xml"/>
-    <import resource="classpath:houseware/learn/spring/batch/case09/jms-jobs.xml"/>
-    <import resource="classpath:houseware/learn/spring/batch/case09/restart-jobs.xml"/>
+    <import resource="classpath:houseware/learn/spring/batch/case10/jms-jobs.xml"/>
 
+    <bean id="jobAsyncLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+        <property name="taskExecutor">
+            <bean class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
+        </property>
+    </bean>
 </beans>

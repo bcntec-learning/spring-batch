@@ -6,19 +6,45 @@
 	    http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
 
 
-
     <bean id="partitionerReader" class="houseware.learn.spring.batch.case09.PartitionerItemReader"/>
     <bean id="partitionerProcessor" class="houseware.learn.spring.batch.case09.PartitionerItemProcessor"/>
     <bean id="partitionerWriter" class="houseware.learn.spring.batch.case09.PartitionerItemWriter"/>
+    <bean id="partitioner" class="houseware.learn.spring.batch.case09.CustomPartitioner"/>
+    <bean id="partitionerItemStream" class="houseware.learn.spring.batch.case09.PartitionerItemStream"/>
 
+    <!--
     <bean id="simplePartitioner" class="org.springframework.batch.core.partition.support.SimplePartitioner" />
+    -->
 
+    <!--
+   <bean id="resourcePartitioner"
+          class="org.springframework.batch.core.partition.support.MultiResourcePartitioner">
+          <property name="keyName" value="officeData" />
+          <property name="resources"
+              value="classpath:/houseware/learn/spring/batch/cas09/data/office*.csv" />
+      </bean>
+   -->
+
+
+    <bean id="taskExecutor"
+          class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="5"/>
+        <property name="maxPoolSize" value="5"/>
+    </bean>
+
+
+    <!--
     <bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
+    -->
+
+
 
 
     <batch:job id="partitionerJob">
-        <batch:step id="partitionerJobStep1">
-            <batch:partition step="bizzStep" partitioner="simplePartitioner">
+        <batch:step id="partitionerJobStep.master">
+            <batch:partition step="bizzStep" partitioner="partitioner">
+
+                <batch:handler grid-size="10" task-executor="taskExecutor"/>
                 <batch:step parent="bizzStep"/>
             </batch:partition>
 
@@ -32,9 +58,12 @@
                          processor="partitionerProcessor"
                          writer="partitionerWriter"
                          commit-interval="1">
-
+                <batch:streams>
+                    <batch:stream ref="partitionerItemStream"/>
+                </batch:streams>
             </batch:chunk>
         </batch:tasklet>
     </batch:step>
+
 
 </beans>

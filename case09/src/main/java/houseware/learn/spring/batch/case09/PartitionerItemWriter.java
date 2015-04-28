@@ -15,9 +15,8 @@ public class PartitionerItemWriter implements ItemWriter<PartitionerItem> {
 
     @Override
     public void write(List<? extends PartitionerItem> items) throws Exception {
-        log.info("partitioner write");
         for (PartitionerItem item : items) {
-            log.info("item:" + item.getId());
+            log.info("item:" + item);
         }
     }
 

@@ -3,6 +3,7 @@ package houseware.learn.spring.batch.case09;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Data @ToString
 public class PartitionerItem {
 
     private Long id;
@@ -20,4 +21,6 @@ public class PartitionerItem {
     public PartitionerItem(Long id){
         this.id=id;
     }
+
+
 }
