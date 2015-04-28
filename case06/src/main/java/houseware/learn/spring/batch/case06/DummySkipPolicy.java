@@ -10,7 +10,7 @@ public class DummySkipPolicy implements SkipPolicy {
 
     @Override
     public boolean shouldSkip(Throwable throwable, int i) throws SkipLimitExceededException {
-        return (throwable instanceof DummyException) ? ((DummyException) throwable).isFatal() : false;
+        return (throwable instanceof DummyException) ? !((DummyException) throwable).isFatal() : false;
 
     }
 }

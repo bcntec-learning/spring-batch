@@ -134,7 +134,8 @@
         <property name="resource" value="file:#{jobParameters['targetDirectory']+jobParameters['targetFile']}"/>
         <property name="linesToSkip" value="1"/>
         <property name="lineMapper">
-            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+            <!--bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper"-->
+            <bean class=" houseware.learn.spring.batch.case03.SpecialLineMapper">
                 <property name="lineTokenizer">
                     <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
                         <property name="names" value="PHONE_ID,NAME,DESCRIPTION,PRICE"/>

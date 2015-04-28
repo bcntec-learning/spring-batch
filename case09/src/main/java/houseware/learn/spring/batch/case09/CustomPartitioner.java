@@ -5,12 +5,14 @@ package houseware.learn.spring.batch.case09;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
 
 /**
  * @author fphilip@houseware.es
  */
+@Slf4j
 public class CustomPartitioner implements Partitioner {
 
 	public static final String PARTITION_KEY = "partition";

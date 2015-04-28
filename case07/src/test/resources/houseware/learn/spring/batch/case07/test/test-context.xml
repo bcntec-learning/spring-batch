@@ -6,7 +6,7 @@
 
 
     <import resource="classpath:houseware/learn/spring/batch/base/context-base.xml"/>
-    <import resource="classpath:houseware/learn/spring/batch/case07/system-jobs.xml"/>
+    <!-- <import resource="classpath:houseware/learn/spring/batch/case07/system-jobs.xml"/> -->
     <import resource="classpath:houseware/learn/spring/batch/case07/decision-jobs.xml"/>
 
 </beans>

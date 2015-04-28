@@ -26,10 +26,6 @@ public class Case04JPATest extends TestCaseBase {
     @Autowired
     private Job airportsPartitionJob;
 
-    @Test
-    public void partitionJpaJob() throws Exception {
-        Assert.assertEquals(BatchStatus.COMPLETED, jobLauncher.run(airportsPartitionJob, new JobParameters()).getStatus());
-    }
 
     @Test
     public void simpleJpaJob() throws Exception {

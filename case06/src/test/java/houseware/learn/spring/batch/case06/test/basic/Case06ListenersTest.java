@@ -38,7 +38,7 @@ public class Case06ListenersTest extends TestCaseBase {
     public void testSkipPolicyFatal() throws Exception {
         JobExecution exec = getJobLauncher().run(listenerJobsSkipPolicyJob, new JobParametersBuilder().addLong("fatal", 66L).toJobParameters());
 
-        Assert.assertEquals(BatchStatus.COMPLETED, exec.getStatus());
+        Assert.assertEquals(BatchStatus.FAILED, exec.getStatus());
     }
 
 

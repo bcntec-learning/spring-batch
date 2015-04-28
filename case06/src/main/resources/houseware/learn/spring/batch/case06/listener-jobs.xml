@@ -52,7 +52,9 @@
 
     <bean id="dummyItemReader" class="houseware.learn.spring.batch.case06.DummyItemReader"/>
     <bean id="dummyItemWriter" class="houseware.learn.spring.batch.case06.DummyItemWriter"/>
-    <bean id="dummyProcessor" class="houseware.learn.spring.batch.case06.DummyItemProcessor"/>
+    <bean id="dummyProcessor" class="houseware.learn.spring.batch.case06.DummyItemProcessor" scope="step">
+        <property name="fatal" value="#{jobParameters['fatal']}"/>
+    </bean>
     <bean id="dummyItemListener" class="houseware.learn.spring.batch.case06.DummyItemListener"/>
     <bean id="dummyChunkListener" class="houseware.learn.spring.batch.case06.DummyChunkListener"/>
     <bean id="dummyStepExecutionListener" class="houseware.learn.spring.batch.case06.DummyStepExecutionListener"/>
