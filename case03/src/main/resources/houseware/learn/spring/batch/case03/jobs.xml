@@ -211,7 +211,7 @@
 
 
 
-    <batch:job id="discriminatorJob">
+    <batch:job id="discriminatorJob" >
         <batch:step id="discriminatorStep">
             <batch:tasklet>
                 <batch:chunk reader="discriminatorReader"
