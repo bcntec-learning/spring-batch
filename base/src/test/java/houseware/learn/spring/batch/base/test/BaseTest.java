@@ -1,4 +1,4 @@
-package houseware.learn.spring.batch.case01.test;
+package houseware.learn.spring.batch.base.test;
 
 import houseware.learn.spring.batch.base.TestCaseBase;
 import org.junit.Assert;
