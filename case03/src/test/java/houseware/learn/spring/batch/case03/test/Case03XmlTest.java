@@ -20,7 +20,7 @@ public class Case03XmlTest extends TestCaseBase {
     private Job productXMLImport;
 
     @Test
-    public void jsonJob() throws Exception {
+    public void xmlJob() throws Exception {
         Assert.assertEquals(BatchStatus.COMPLETED, jobLauncher.run(productXMLImport, new JobParameters()).getStatus());
     }
 
