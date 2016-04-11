@@ -14,7 +14,7 @@ import javax.annotation.Generated;
  */
 
 @Slf4j
-public class DummyItemProcessor implements ItemProcessor<Dummy, Dummy> /*, ChunkListener*/ {
+public class DummyItemProcessor implements ItemProcessor<Dummy, Dummy> , ChunkListener {
     @Getter
     @Setter
     Long fatal = null;
@@ -31,18 +31,18 @@ public class DummyItemProcessor implements ItemProcessor<Dummy, Dummy> /*, Chunk
         return item;
     }
 
-    //@Override
+    @Override
     public void beforeChunk(ChunkContext context) {
         fatal = (Long) context.getStepContext().getJobParameters().get("fatal");
 
     }
 
-//    @Override
+    @Override
     public void afterChunk(ChunkContext context) {
 
     }
 
-  //  @Override
+    @Override
     public void afterChunkError(ChunkContext context) {
 
     }
