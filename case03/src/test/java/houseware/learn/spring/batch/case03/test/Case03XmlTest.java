@@ -23,7 +23,7 @@ public class Case03XmlTest extends TestCaseBase {
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    public void jsonXml() throws Exception {
+    public void xmlJob() throws Exception {
         Assert.assertEquals(BatchStatus.COMPLETED, jobLauncher.run(productXMLImport, new JobParameters()).getStatus());
         jdbcTemplate.queryForList("select name from products", String.class).forEach((string) -> {
         	System.out.println("<name>: " + string);
