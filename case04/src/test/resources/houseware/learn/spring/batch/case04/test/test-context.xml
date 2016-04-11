@@ -7,12 +7,12 @@
 
     <import resource="classpath:houseware/learn/spring/batch/base/context-base.xml"/>
     <import resource="classpath:houseware/learn/spring/batch/case04/jobs.xml"/>
-<!--
+
 
     <bean class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
--->
+
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
     <bean id="entityManagerFactory"

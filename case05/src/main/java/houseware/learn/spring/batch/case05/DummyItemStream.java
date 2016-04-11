@@ -14,12 +14,13 @@ public class DummyItemStream implements ItemStream {
 
     @Override
     public void open(ExecutionContext executionContext) throws ItemStreamException {
-        log.info("DummyItemStream.open");
+    	executionContext.putString("HOLA", "MUNDO");
+        log.info("DummyItemStream.open:"+executionContext);
     }
 
     @Override
     public void update(ExecutionContext executionContext) throws ItemStreamException {
-        log.info("DummyItemStream.update");
+        log.info("DummyItemStream.update"+executionContext.getString("HOLA"));
     }
 
     @Override

@@ -9,7 +9,8 @@
     <batch:job id="notebooksImportJob" >
 
         <batch:step id="notebooksImportJobStep1" parent="notebooksImportStep" next="notebooksImportJobStep2"/>
-        <batch:step id="notebooksImportJobStep2" parent="exportProductsTxt"/>
+        <batch:step id="notebooksImportJobStep2" parent="exportProductsTxt" next="notebooksImportJobStep3"/>
+        <batch:step id="notebooksImportJobStep3" parent="exportProductsCsv"/>
 
     </batch:job>
 
@@ -24,6 +25,14 @@
                 <skippable-exception-classes>
                     <include class="org.springframework.batch.item.file.FlatFileParseException"/>
                 </skippable-exception-classes>
+            </chunk>
+        </tasklet>
+    </batch:step>
+    <batch:step id="exportProductsCsv">
+        <tasklet>
+            <chunk reader="productsDBItemReader"
+                   writer="productsCsvWriter"
+                   commit-interval="10">
             </chunk>
         </tasklet>
     </batch:step>
@@ -166,13 +175,36 @@
     </bean>
 
 
-    <bean id="productsTxtWriter" class="org.springframework.batch.item.file.FlatFileItemWriter">
-        <property name="resource" value="file:target/export.txt"/>
+    <bean id="productsTxtWriter" class="org.springframework.batch.item.file.FlatFileItemWriter" scope="step">
+        <property name="resource" value="file:target/export-#{jobParameters['timestamp']}.txt"/>
         <property name="lineAggregator" ref="passThroughLineAggregator"/>
+        <property name="headerCallback"><bean class="houseware.learn.spring.batch.case03.ProductHeaderCallback"/></property>
     </bean>
 
     <bean id="passThroughLineAggregator"
           class="org.springframework.batch.item.file.transform.PassThroughLineAggregator"/>
+
+
+
+    <bean id="productsCsvWriter" class="org.springframework.batch.item.file.FlatFileItemWriter" scope="step">
+        <property name="resource" value="file:target/export-#{jobParameters['timestamp']}.csv"/>
+        <property name="lineAggregator" >
+        	<bean class="org.springframework.batch.item.file.transform.DelimitedLineAggregator">
+        		<property name="delimiter" value=";"/>
+        		<property name="fieldExtractor">
+        		<bean class="org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor">
+					<property name="names" value="id,name,type,description,price" />
+				</bean>
+        		
+                <!--    <bean class="houseware.learn.spring.batch.case03.ProductFieldExtractor"/> --> 
+        		</property>
+        	</bean>
+        
+        </property>
+    </bean>
+
+    
+
 
 
     <bean id="productsDBItemWriter"

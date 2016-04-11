@@ -12,11 +12,14 @@ import org.springframework.batch.support.PatternMatcher;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Map;
 
 /**
  *
  */
+@Slf4j
 public class SpecialLineMapper<T>  implements LineMapper<T>, InitializingBean {
 
 
@@ -27,6 +30,7 @@ public class SpecialLineMapper<T>  implements LineMapper<T>, InitializingBean {
 
     @Override
     public T mapLine(String line, int lineNumber) throws Exception {
+    	log.info("LINE:"+line);
         DefaultFieldSet z = (DefaultFieldSet) tokenizer.tokenize(line);
 
         return patternMatcher.match(line).mapFieldSet(

@@ -31,7 +31,7 @@
 
                     <bean class="org.springframework.batch.item.file.FlatFileItemReader">
                         <property name="resource"
-                                  value="http://sourceforge.net/p/openflights/code/HEAD/tree/openflights/data/airports.dat?format=raw"/>
+                                  value="https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat"/>
                         <property name="lineMapper">
                             <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
                                 <property name="lineTokenizer">

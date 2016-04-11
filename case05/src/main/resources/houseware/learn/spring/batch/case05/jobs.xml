@@ -13,7 +13,7 @@
                 <batch:chunk reader="dummyItemMultiReader"
                              writer="dummyItemWriter"
                              processor="dummyCompositeItemProcessor"
-                             commit-interval="2">
+                             commit-interval="60">
                     <batch:streams>
                         <batch:stream ref="dummyItemStream"/>
                     </batch:streams>

@@ -32,7 +32,6 @@ public class Case03NotebooksTest extends TestCaseBase {
         Assert.assertEquals(BatchStatus.COMPLETED,
                 getJobLauncher().run(notebooksImportJob, new JobParametersBuilder()
                         .addString("file", "classpath:/houseware/learn/spring/batch/case03/data/notebooks.txt")
-                        .addString("exportResource", "./target/export.txt")
                         .addLong("timestamp", System.currentTimeMillis())
                         .toJobParameters()
         ).getStatus());
