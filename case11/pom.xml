@@ -25,6 +25,12 @@
             <artifactId>case05</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>houseware.learn.spring.batch</groupId>
+            <artifactId>case03</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>houseware.learn.spring.batch</groupId>
             <artifactId>case06</artifactId>
