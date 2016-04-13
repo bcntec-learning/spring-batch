@@ -19,7 +19,7 @@ public class Step2Task implements Tasklet {
         JobParameters jobParameters = chunkContext.getStepContext().getStepExecution().getJobParameters();
         StepExecution stepExecution = chunkContext.getStepContext().getStepExecution();
 
-        Long result = stepExecution.getExecutionContext().containsKey("result") ? stepExecution.getExecutionContext().getLong("result") : null;
+        Long result = (Long)chunkContext.getStepContext().getJobExecutionContext().get("result");
         Long jobInstanceId = chunkContext.getStepContext().getStepExecution().getJobExecution().getId();
         Long jobExecutionId = chunkContext.getStepContext().getStepExecution().getJobExecution().getId();
 

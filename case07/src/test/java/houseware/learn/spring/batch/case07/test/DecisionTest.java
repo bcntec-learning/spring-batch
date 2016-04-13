@@ -34,7 +34,7 @@ public class DecisionTest extends TestCaseBase {
     @Test
     public void decision100Test() throws Exception {
         JobExecution exec = getJobLauncher().run(decisionJob, new JobParametersBuilder().addLong("param", 100L).toJobParameters());
-        Assert.assertEquals(BatchStatus.COMPLETED, exec.getStatus());
+        Assert.assertEquals(BatchStatus.FAILED, exec.getStatus());
     }
 
 }

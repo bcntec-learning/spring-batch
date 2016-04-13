@@ -8,7 +8,7 @@
 
     <batch:job id="decisionJob">
         <batch:decision id="decisionParamJobDecision" decider="decisionParamDecider">
-            <batch:end on="ERROR"/>
+            <batch:fail on="ERROR"/>
             <batch:next on="OK" to="decisionJobStep1"/>
         </batch:decision>
         <batch:step id="decisionJobStep1" next="decisionJobDecision">

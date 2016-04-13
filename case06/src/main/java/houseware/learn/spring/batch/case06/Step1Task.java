@@ -33,7 +33,7 @@ public class Step1Task implements Tasklet {
         }
 
         JobParameters jobParameters = chunkContext.getStepContext().getStepExecution().getJobParameters();
-        log.info("RestartStep1Task: (val=" + i + ", instance=" + jobInstanceId + ", exceuntion=" + jobExecutionId + ") owner >" + jobParameters.getString("owner") + ">>>>>" + i);
+        log.info("RestartStep1Task: (val=" + i + ", instance=" + jobInstanceId + ", execution=" + jobExecutionId + ") owner >" + jobParameters.getString("owner") + ">>>>>" + i);
         stepExecutionContext.putInt("idx", ++i);
         throw new RuntimeException("idx=" + i);
     }
