@@ -31,18 +31,18 @@ public class DummyItemProcessor implements ItemProcessor<Dummy, Dummy> , ChunkLi
         return item;
     }
 
-    //@Override
+    @Override
     public void beforeChunk(ChunkContext context) {
         fatal = (Long) context.getStepContext().getJobParameters().get("fatal");
 
     }
 
-//    @Override
+    @Override
     public void afterChunk(ChunkContext context) {
 
     }
 
-  //  @Override
+    @Override
     public void afterChunkError(ChunkContext context) {
 
     }
