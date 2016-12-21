@@ -1,4 +1,4 @@
-package houseware.learn.spring.batch.case09.test;
+package houseware.learn.spring.batch.case09;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;

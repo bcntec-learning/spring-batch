@@ -1,4 +1,4 @@
-package houseware.learn.spring.batch.case09.test;
+package houseware.learn.spring.batch.case09;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;

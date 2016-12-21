@@ -103,6 +103,7 @@
          <stopKey>STOP</stopKey>
          <stopPort>9999</stopPort>
          <scanIntervalSeconds>5</scanIntervalSeconds>
+            <jvmArgs>-Dbatch.data.source.init=false</jvmArgs>
         </configuration>
        </plugin>
       </plugins>
